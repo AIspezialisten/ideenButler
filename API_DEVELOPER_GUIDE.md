@@ -85,7 +85,12 @@ curl https://ideenbutler.paperworx.ai/api/health
 # Response
 {
   "status": "healthy",
-  "service": "ideen-butler"
+  "service": "ideen-butler",
+  "timestamp": "2024-08-19T10:30:00Z",
+  "services": {
+    "database": "connected",
+    "ai_service": "available"
+  }
 }
 ```
 
@@ -100,7 +105,8 @@ curl -X POST https://ideenbutler.paperworx.ai/api/users \
     "first_name": "Max",
     "last_name": "Mustermann",
     "company_name": "Mustermann GmbH",
-    "industry": "IT-Dienstleistungen"
+    "industry": "IT-Dienstleistungen",
+    "gdpr_consent": true
   }'
 
 # Step 2: Create a session
@@ -111,11 +117,18 @@ curl -X POST https://ideenbutler.paperworx.ai/api/sessions \
     "occasion": "Messeauftritt"
   }'
 
-# Step 3: Generate an idea
+# Step 3: Generate an idea (Option A)
 curl -X POST https://ideenbutler.paperworx.ai/api/ideas/generate \
   -H "Content-Type: application/json" \
   -d '{
     "session_id": "SESSION_ID_FROM_STEP_2",
+    "additional_info": "Fokus auf Nachhaltigkeit"
+  }'
+
+# Step 3: Generate an idea (Option B - Alternative)
+curl -X POST https://ideenbutler.paperworx.ai/api/sessions/SESSION_ID_FROM_STEP_2/ideas \
+  -H "Content-Type: application/json" \
+  -d '{
     "additional_info": "Fokus auf Nachhaltigkeit"
   }'
 ```
@@ -1218,11 +1231,7 @@ Check API health: [https://ideenbutler.paperworx.ai/api/health](https://ideenbut
 - Analytics tracking
 - Export capabilities
 
-### Planned Features
-- JWT authentication
-- WebSocket support for real-time generation
-- Batch operations
-- Multi-language support
+
 
 ---
 
