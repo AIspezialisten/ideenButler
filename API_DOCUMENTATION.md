@@ -184,6 +184,8 @@ Content-Type: application/json
 GET /api/users/{user_id}
 ```
 
+**Note:** The `user_id` parameter type may vary between implementations (integer or UUID string).
+
 #### List Users
 ```http
 GET /api/users
@@ -245,6 +247,16 @@ Content-Type: application/json
 {
   "session_id": "session-uuid",
   "additional_info": "Fokus auf Nachhaltigkeit und Innovation"
+}
+```
+
+**Alternative Endpoint:**
+```http
+POST /api/sessions/{session_id}/ideas
+Content-Type: application/json
+
+{
+  "additional_info": "Fokus auf Nachhaltigkeit"
 }
 ```
 
